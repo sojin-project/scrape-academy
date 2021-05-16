@@ -61,6 +61,9 @@ class Context:
         return Cache(cache_dir)
 
     def open_cache(self, cache_dir: Union[Path, str, None] = None) -> None:
+        if self._cache:
+            self._cache.save()
+
         self._cache = self._create_cache(cache_dir)
 
     async def close(self) -> None:
